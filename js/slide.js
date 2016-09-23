@@ -1,15 +1,24 @@
 ;(function($,win){
-	var conf={
+	var confs={
 		direction:'horizontal', //or vertical
 		autoPlay:3000,  //设置为false则不自动播放
 		speed:400, //切换速度
-		hoverStop:false;//鼠标悬浮停止播放
+		hoverStop:false,//鼠标悬浮停止播放
+		slidePrev:".slide-prev",
+		slideNext:".slide-next",
+		slideNav:".slide-nav-btn",
 	}
-	var slide=function(){
-
+	var slide=function(dom,conf){
+		var conf=this.conf=$.extend(true, confs, conf);
+		this.container=$(dom);
+		this.warp=this.container.find(".slide-warp");
+		this.slide=this.warp.find(".slide");
+		this.nav=this.container.find(conf.slideNav);
+		this.prevBtn=this.container.find(conf.slidePrev);
+		this.nextBtn=this.container.find(conf.slideNext);
+		this.init();
 	}
 	slide.prototype={
-<<<<<<< HEAD
 		init:function(){
 			this.reDom();
 			this.ind=0;
@@ -89,10 +98,12 @@
 			})
 
 		}
-=======
->>>>>>> parent of f53b25c... 第一版
 
 	}
 
 	win.slide=slide;
 })(jQuery,window)
+
+$(function(){
+	new slide('.slide-container',{aa:12});
+})
